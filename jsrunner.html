@@ -1,0 +1,26 @@
+<html>
+<meta name = "viewport"  content = "width = device-width, initial-scale = 1.0, user-scalable = no">
+<body>
+<input id ="input" type = "pain"></input>
+<button onclick = "run()">run</button><br>
+<p id = "error"></p>
+</body>
+<style>
+//#input{
+  // height:500px
+//}
+</style>
+<script>
+const input = document.getElementById ("input");
+function run (){
+    //try {
+        let log = document.getElementById  ('error');
+        eval ("try {" + input.value + "}catch (err){log.innerHTML = err}");
+        
+    //}cartch (err){
+       // let error = document.getElementById ("error");
+        //error.innerHTML = err
+    //}
+}
+</script>
+</html>

@@ -1,0 +1,104 @@
+<html>
+<head>
+<title>3d RENDERER</title>
+</head>
+<meta name = "viewport"  content = "width = device-width, initial-scale = 1.0, user-scalable = yes">
+<body>
+<canvas id = "canvas"></canvas>
+</body>
+<script>(function () { var script = document.createElement('script'); script.src="eruda.js"; document.body.append(script); script.onload = function () { eruda.init(); } })();</script>
+</html>
+<script>
+const canvas = document.getElementById ("canvas");
+const ctx = canvas.getContext ("2d");
+canvas.width = 500;
+canvas.height = 500;
+ctx.strokeWidth = 100;
+//xo +((xv - xo)/(zv-zo))
+//yo +((yv - yo)/(zv-zo))
+class point {
+    constructor (x,y,z){
+        this.focalLength = 50;
+        this.x = (this.focalLength * x)/(this.focalLength + z);
+        this.y = (this.focalLength * y)/(this.focalLength + z);
+    }
+    upt (ctx){
+        ctx.fillRect (this.x,this.y,10,10);
+    }
+}
+function con3d(x,y,z,t){
+    let focalLength = 100;
+    //let xp = (focalLength * x)/(focalLength + z);
+    //let yp = (focalLength * y)/(focalLength + z);
+    let xv = 0;
+    let yv = 10;
+    let zv = 10;
+    let xp = x +((xv - x)/(zv-z));
+    let yp = y +((yv - y)/(zv-z));
+        if (t == 0){ctx.moveTo (xp,yp);}
+        if (t == 1){ctx.lineTo (xp,yp);}
+}
+ctx.translate (250,250);
+let p1 = new point (-50,50,0);
+let p2 = new point (50,50,0);
+let p3 = new point (50,50,50);
+let p4 = new point (-50,50,50);
+
+
+
+ctx.lineCap = "round";
+// lower face
+let n = -500;
+let ani;
+function animate (){
+ctx.strokeStyle = "#ffffff";
+ctx.lineWidth = 0;
+if (n > 500) n= -500;
+ctx.clearRect (-250,-250,500,500);
+n++;
+ctx.fillStyle = "blue";
+ctx.beginPath  ();
+con3d (-50+n,50,0,0);
+con3d (50+n,50,0,1);
+con3d (50+n,50,50,1);
+con3d (-50+n,50,50,1);
+con3d (-50+n,50,0,1);
+
+//upper face
+con3d (-50+n,-50,0,0);
+con3d (50+n,-50,0,1);
+con3d (50+n,-50,50,1);
+con3d (-50+n,-50,50,1);
+con3d (-50+n,-50,0,1);
+ctx.closePath ();
+//ctx.stroke ();
+ctx.fill ();
+//lines connectiong
+ctx.fillStyle = "green";
+ctx.beginPath  ();
+//left
+con3d (-50+n,50,0,0);
+con3d (-50+n,-50,0,1);
+con3d (-50+n,-50,50,1);
+con3d (-50+n,50,50,1);
+
+con3d (50+n,50,0,0);
+con3d (50+n,-50,0,1);
+con3d (50+n,-50,50,1);
+con3d (50+n,50,50,1);
+ctx.closePath ();
+//ctx.stroke ();
+//ctx.fillRect  (n,-50,100,100);
+ctx.fill ();
+ani = requestAnimationFrame (animate);
+}
+animate ()
+/*ctx.lineTo (p2.x,p2.y);
+ctx.lineTo  (p3.x,p3.y);
+ctx.lineTo  (p4.x,p4.y);
+ctx.lineTo  (p1.x,p1.y);
+ctx.lineTo  (60,300 - (50 * Math.sqrt (3)));
+ctx.lineTo  (10,300);*/
+//ctx.fill ();
+</script>
+</html>

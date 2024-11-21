@@ -1,0 +1,39 @@
+<html>
+<head>
+<meta name = "viewport"  content = "width = device-width, initial-scale = 1.0, user-scalable = yes">
+<title>PIXEL ART</title>
+</head>
+<body style = "margin:0">
+<canvas id = "canvas" style = "border: 1px solid black;width:64;height:64"></canvas>
+<input type = "color" id = "input">select </input>
+</body>
+<script>
+const canvas = document.getElementById ("canvas");
+const ctx = canvas.getContext ("2d");
+canvas.width = 640;
+canvas.height = 640;
+ctx.imageSmoothingEnabled = false;
+ctx.fillRect (0,0,1,1);
+ctx.fillRect  (0,0,64,64);
+ctx.beginPath ();
+canvas.addEventListener ("touchstart", (e) => {
+    ctx.fillStyle = input.value;
+    let x = Math.floor (e.changedTouches [0].pageX * 10);
+    let y = Math.floor (e.changedTouches [0].pageY * 10);
+    ctx.fillRect (x,y,10,10);
+    ctx.stroke ()
+});
+canvas.addEventListener ("touchmove", (e) => {
+    e.preventDefault ();
+    let x = Math.floor(e.changedTouches [0].pageX) * 10;
+    let y = Math.floor(e.changedTouches [0].pageY) *10;
+    /*ctx.moveTo(x,y);
+    ctx.lineTo (x,y);
+    ctx.stroke ();*/
+    ctx.fillRect  (x,y,10,10);
+})
+canvas.addEventListener  ("touchend", (e) => {
+    ctx.stroke ();
+})
+</script>
+</html>

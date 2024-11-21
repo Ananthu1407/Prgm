@@ -1,0 +1,17 @@
+<html>
+<meta name = "viewport"  content = "width = device-width, initial-scale = 1.0, user-scalable = yes">
+<title>Media devices</title>
+<body>
+<video id="camera-stream" autoplay></video>
+</body>
+<script>
+navigator.mediaDevices.getUserMedia({ video: true })
+.then(function(stream) {
+    const videoElement = document.getElementById('camera-stream');
+    videoElement.srcObject = stream;
+})
+.catch(function(error) {
+    console.error("Error accessing the camera", error);
+});
+</script>
+</html>

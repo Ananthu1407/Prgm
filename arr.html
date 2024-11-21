@@ -1,0 +1,33 @@
+<html>
+<meta name = "viewport"  content = "width = device-width, initial-scale = 1.0, user-scalable = yes">
+<body>
+</body>
+<script>
+var my_list = [];
+while (true){
+  alert ("1.to add  \n 2. remove  \n 3.show list \n 4.exit");
+  let input = prompt ("enter option");
+  if (input == 4){
+    document.write (my_list.join ("<ol>"));
+    break;
+  }else if (input == 1){
+    let item = prompt ("enter item");
+    my_list.push (item);
+    alert (item + "is added to list");
+  }else if (input == 2){
+    let ritem = prompt ("enter item to remove");
+    let index = my_list.indexOf (ritem);
+    if (index == -1){
+      alert ("item is not in list");
+    }else {
+      my_list.splice (index,1);
+      alert (ritem + "" + "is removed")
+    }
+  }else if (input == 3){
+    alert (my_list)
+  }else {
+    alert ("invalid option");
+  }
+}
+</script>
+</html>

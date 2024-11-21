@@ -1,0 +1,33 @@
+<html>
+<body>
+<canvas id = "canvas"></canvas>
+</body>
+<script>
+const canvas = document.getElementById ("canvas");
+const ctx = canvas.getContext ("2d");
+function  deg(a){
+    return a * (Math.PI/180);
+}
+canvas.width = 1000;
+canvas.height = 600;
+ctx.fillStyle = "yellow";
+ctx.fillRect (0,0,canvas.width,canvas.height)
+ctx.translate (canvas.width / 2,canvas.height / 2);
+ctx.fillStyle = "black";
+ctx.beginPath ();
+ctx.moveTo (-720,0);
+for (let i = -720;i < 720;i++){
+    let opp = Math.sin(deg (i))* i/5;
+    ctx.lineTo (i,-1 * opp);
+}
+ctx.moveTo  (-720,0);
+for (let i = -720;i < 720;i++){
+    let opp = Math.tan (deg (i));
+   // ctx.lineTo (i,-1* opp);
+}
+ctx.moveTo  (-720,0);
+ctx.lineTo  (720,0);
+ctx.stroke ();
+ctx.closePath ();
+</script>
+</html>
